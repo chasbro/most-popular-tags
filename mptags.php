@@ -2,7 +2,7 @@
 
 /*
 Plugin name: Most Popular Tags
-Plugin URI: http://www.maxpagels.com/code
+Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A plugin that enables a configurable "Most Popular Tags" widget.
 Version: 0.1
 Author: Max Pagels
