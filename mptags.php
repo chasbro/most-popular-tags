@@ -4,7 +4,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A plugin that enables a configurable "Most Popular Tags" widget.
-Version: 0.2
+Version: 0.3
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -65,10 +65,10 @@ function init_most_popular_tags() {
 			update_option('most_popular_tags', $options);
 		}
 		
-		$s1 ="";
-		$s2=""; 
-		$s3="";
-		$s4="";
+		$s1 = "";
+		$s2 = ""; 
+		$s3 = "";
+		$s4 = "";
 		$selected = "selected";
 		
 		if($options['unit'] == "px")
@@ -79,10 +79,8 @@ function init_most_popular_tags() {
 			$s3 = $selected;
 		else
 			$s4 = $selected;
-			
 		
-		echo'<p>
-	    	<label for="mptags-title">Widget Title: </label>
+		echo'<p><label for="mptags-title">Widget Title: </label>
 	    	<input type="text" id="mptags-title" name="mptags-title" value="' . $options['title'] . '"/></p>
 			<p><label for="mptags-tag-count">Number of tags to show: </label>
 	    	<input type="text" id="mptags-tag-count" name="mptags-tag-count" value="' . $options['tag_count'] . '"/></p>
@@ -91,15 +89,13 @@ function init_most_popular_tags() {
 			<p><label for="mptags-largest">Largest font size: </label>
 	    	<input type="text" id="mptags-largest" name="mptags-largest" value="' . $options['largest'] . '"/></p>
 			<p><label for="mptags-unit">Unit:</label></p>
-			<p>
-			<select id="mptags-unit" name="mptags-unit">
+			<p><select id="mptags-unit" name="mptags-unit">
 				<option value="px" ' . $s1 . '>px</option>
 				<option value="pt" ' . $s2 . '>pt</option>
 				<option value="%" ' . $s3 . '>%</option>
 				<option value="em" ' . $s4 . '>em</option>
 			</select></p>
-			<input type="hidden" id="mptags-submit" name="mptags-submit" value="1" />
-			</p>';
+			<input type="hidden" id="mptags-submit" name="mptags-submit" value="1" />';
 			
 	}
 
