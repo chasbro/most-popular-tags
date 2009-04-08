@@ -4,7 +4,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A plugin that enables a configurable "Most Popular Tags" widget.
-Version: 0.3
+Version: 0.4
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -36,10 +36,11 @@ function init_most_popular_tags() {
 		$smallest = $options['smallest'];
 		$largest = $options['largest'];
 		$unit = $options['unit'];
+		$format = $options['format'];
 
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
-		wp_tag_cloud("smallest=$smallest&largest=$largest&number=$tagcount&orderby=count&order=DESC&unit=$unit");
+		wp_tag_cloud("smallest=$smallest&largest=$largest&number=$tagcount&orderby=count&order=DESC&unit=$unit&format=$format");
 		echo $after_widget;
 		
 	}
@@ -49,7 +50,7 @@ function init_most_popular_tags() {
 		$options = get_option('most_popular_tags');
 		
 		if(!is_array($options)) {
-			$options = array('title' => 'Most Popular Tags', 'tag_count' => 10, 'smallest' => 12, 'largest' => 12, 'unit' => 'px');
+			$options = array('title' => 'Most Popular Tags', 'tag_count' => 10, 'smallest' => 12, 'largest' => 12, 'unit' => 'px', 'format' => 'flat');
 		}
 		
 		if($_POST['mptags-submit']) {
@@ -62,6 +63,7 @@ function init_most_popular_tags() {
 			$options['smallest'] = intval(strip_tags(stripslashes($_POST['mptags-smallest'])));
 			$options['largest'] = intval(strip_tags(stripslashes($_POST['mptags-largest'])));
 			$options['unit'] = strip_tags(stripslashes($_POST['mptags-unit']));
+			$options['format'] = strip_tags(stripslashes($_POST['mptags-format']));
 			update_option('most_popular_tags', $options);
 		}
 		
@@ -69,6 +71,8 @@ function init_most_popular_tags() {
 		$s2 = ""; 
 		$s3 = "";
 		$s4 = "";
+		$f1 = "";
+		$f2 = "";
 		$selected = "selected";
 		
 		if($options['unit'] == "px")
@@ -79,6 +83,11 @@ function init_most_popular_tags() {
 			$s3 = $selected;
 		else
 			$s4 = $selected;
+			
+		if($options['format'] == "flat")
+			$f1 = $selected;
+		else
+			$f2 = $selected;
 		
 		echo'<p><label for="mptags-title">Widget Title: </label>
 	    	<input type="text" id="mptags-title" name="mptags-title" value="' . $options['title'] . '"/></p>
@@ -94,6 +103,11 @@ function init_most_popular_tags() {
 				<option value="pt" ' . $s2 . '>pt</option>
 				<option value="%" ' . $s3 . '>%</option>
 				<option value="em" ' . $s4 . '>em</option>
+			</select></p>
+			<p><label for="mptags-format">Format:</label></p>
+			<p><select id="mptags-format" name="mptags-format">
+				<option value="flat" ' . $f1 . '>Flat</option>
+				<option value="list" ' . $f2 . '>List</option>
 			</select></p>
 			<input type="hidden" id="mptags-submit" name="mptags-submit" value="1" />';
 			
