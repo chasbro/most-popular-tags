@@ -67,12 +67,6 @@ function init_most_popular_tags() {
 			update_option('most_popular_tags', $options);
 		}
 		
-		$s1 = "";
-		$s2 = ""; 
-		$s3 = "";
-		$s4 = "";
-		$f1 = "";
-		$f2 = "";
 		$selected = "selected";
 		
 		if($options['unit'] == "px")
