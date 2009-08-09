@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags
-Version: 1.0
+Version: 1.1
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -105,8 +105,16 @@ function form($instance) {
 		$s2 = $selected;
 	elseif($instance['unit'] == "%")
 		$s3 = $selected;
-	else
+	elseif($instance['unit'] == "em")
 		$s4 = $selected;
+	elseif($instance['unit'] == "pc")
+		$s5 = $selected;
+	elseif($instance['unit'] == "mm")
+		$s6 = $selected;
+	elseif($instance['unit'] == "cm")
+		$s7 = $selected;
+	else
+		$s8 = $selected;
 		
 	if($instance['format'] == "flat")
 		$f1 = $selected;
@@ -142,31 +150,35 @@ function form($instance) {
         <p>
           <label for="'.$this->get_field_name('unit').'">Unit: </label><br />
           <select id="'.$this->get_field_id('unit').'" name="'.$this->get_field_name('unit').'"
-            <option value="px" '.$s1.'>px</option>
-            <option value="pt" '.$s2.'>pt</option>
-            <option value="%" '.$s3.'>%</option>
-            <option value="em" '.$s4.'>em</option>
+            <option value="px" '.$s1.'>Pixels (px)</option>
+            <option value="pt" '.$s2.'>Points (pt)</option>
+            <option value="%" '.$s3.'>Percent (%)</option>
+            <option value="em" '.$s4.'>Ems (em)</option>
+            <option value="pc" '.$s5.'>Picas (pc)</option>
+            <option value="mm" '.$s6.'>Millimeters (mm)</option>
+            <option value="cm" '.$s7.'>Centimeters (cm)</option>
+            <option value="in" '.$s8.'>Inches (in)</option>
           </select>
         </p>
         <p>
           <label for="'.$this->get_field_name('format').'">Format: </label><br />
           <select id="'.$this->get_field_id('format').'" name="'.$this->get_field_name('format').'"
-            <option value="flat" '.$f1.'>flat</option>
-            <option value="list" '.$f2.'>list</option>
+            <option value="flat" '.$f1.'>Flat</option>
+            <option value="list" '.$f2.'>List</option>
           </select>
         </p>
         <p>
           <label for="'.$this->get_field_name('orderby').'">Order by: </label><br />
           <select id="'.$this->get_field_id('orderby').'" name="'.$this->get_field_name('orderby').'"
-            <option value="count" '.$ob1.'>count</option>
-            <option value="name" '.$ob2.'>name</option>
+            <option value="count" '.$ob1.'>Number of posts</option>
+            <option value="name" '.$ob2.'>Tag name</option>
           </select>
         </p>
         <p>
           <label for="'.$this->get_field_name('order').'">Order: </label><br />
           <select id="'.$this->get_field_id('order').'" name="'.$this->get_field_name('order').'"
-            <option value="ASC" '.$o1.'>ASC</option>
-            <option value="DESC" '.$o2.'>DESC</option>
+            <option value="ASC" '.$o1.'>Ascending</option>
+            <option value="DESC" '.$o2.'>Descending</option>
           </select>
         </p>';
 }
