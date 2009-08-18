@@ -2,7 +2,7 @@
 Contributors: maxpagels
 Tags: widgets, tags, popular
 Requires at least: 2.8
-Tested up to: 2.8.3
+Tested up to: 2.8.4
 Stable tag: trunk
 
 Most Popular Tags is a plugin that displays your blog's most popular tags as a sidebar widget
