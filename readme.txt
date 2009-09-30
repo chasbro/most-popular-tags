@@ -2,7 +2,7 @@
 Contributors: maxpagels
 Tags: widgets, tags, popular
 Requires at least: 2.8
-Tested up to: 2.8.4
+Tested up to: 2.8.3
 Stable tag: trunk
 
 Most Popular Tags is a plugin that displays your blog's most popular tags as a sidebar widget
@@ -15,10 +15,12 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 1. Upload `mostpopulartags.php` to the `/wp-content/plugins/` directory of your WordPress installation
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. The Most Popular Tags widget can now be configured and used from the Appearance -> Wigdets menu
+3. The Most Popular Tags widget can now be configured and used from the Appearance -> Widgets menu
 
 == Changelog ==
 
+- 2.0.1: Readme.txt spelling corrections
+- 2.0: Added the option to display categories in addition to tags
 - 1.1: Added millimeters, centimeters, inches and picas to the font unit menu. Additionally, all of the settings have been updated with more descriptive text.
 
 == Miscellaneous ==
