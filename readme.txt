@@ -19,6 +19,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 2.5: Added a nifty uninstaller that removes all traces of the plugin when it's deleted via the Manage Plugins menu
 - 2.0.1: Readme.txt spelling corrections
 - 2.0: Added the option to display categories in addition to tags
 - 1.1: Added millimeters, centimeters, inches and picas to the font unit menu. Additionally, all of the settings have been updated with more descriptive text.
