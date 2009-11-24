@@ -1,5 +1,6 @@
 === Most Popular Tags ===
 Contributors: maxpagels
+Donate link: http://www.maxpagels.com/donate
 Tags: widgets, tags, categories, popular
 Requires at least: 2.8
 Tested up to: 2.8.6
@@ -28,8 +29,3 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 == Miscellaneous ==
 
 Version 0.6 of this plugin, which adds advanced ordering options, was heavily contributed to by Alexandre Piccolo - http://www.piparote.com
-
-== Donate ==
-
-If you like the Most Popular Tags plugin, please consider [donating](http://www.maxpagels.com/donate/).
-
