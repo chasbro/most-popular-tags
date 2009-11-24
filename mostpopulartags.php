@@ -4,8 +4,8 @@
 
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
-Description: A configurable widget that displays your blog's most popular tags
-Version: 1.1
+Description: A configurable widget that displays your blog's most popular tags or categories
+Version: 2.6
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -52,6 +52,7 @@ function widget($args, $instance) {
   $format = empty($instance['format']) ? 'flat' : $instance['format'];
   $orderby = empty($instance['orderby']) ? 'count' : $instance['orderby'];
   $order = empty($instance['order']) ? 'DESC' : $instance['order'];
+  $taxonomy = empty($instance['taxonomy']) ? 'post_tag' : $instance['taxonomy'];
   
   echo $before_widget;
   
@@ -59,7 +60,7 @@ function widget($args, $instance) {
     echo $before_title . $title . $after_title;
   }
   
-  wp_tag_cloud("smallest=$smallest&largest=$largest&number=$tagcount&orderby=$orderby&order=$order&unit=$unit&format=$format");
+  wp_tag_cloud("smallest=$smallest&largest=$largest&number=$tagcount&orderby=$orderby&order=$order&unit=$unit&format=$format&taxonomy=$taxonomy");
   
   echo $after_widget;
 }
@@ -77,6 +78,7 @@ function update($new_instance, $old_instance) {
   $instance['format'] = strip_tags(stripslashes($new_instance['format']));
   $instance['orderby'] = strip_tags(stripslashes($new_instance['orderby']));
   $instance['order'] = strip_tags(stripslashes($new_instance['order']));
+  $instance['taxonomy'] = strip_tags(stripslashes($new_instance['taxonomy']));
   
   return $instance;
 }
@@ -89,13 +91,15 @@ function form($instance) {
                                                     'unit' => 'px',
                                                     'format' => 'flat',
                                                     'orderby' => 'count',
-                                                    'order' => 'DESC'));
+                                                    'order' => 'DESC',
+                                                    'taxonomy' => 'post_tag'));
   
   $title = htmlspecialchars($instance['title']);
   $unit = htmlspecialchars($instance['unit']);
   $format = htmlspecialchars($instance['format']);
   $orderby = htmlspecialchars($instance['orderby']);
   $order = htmlspecialchars($instance['order']);
+  $taxonomy = htmlspecialchars($instance['taxonomy']);
   
   $selected = "selected";
 	
@@ -130,13 +134,26 @@ function form($instance) {
 		$o1 = $selected;
 	else
 		$o2 = $selected;
+
+	if($instance['taxonomy'] == "post_tag")
+		$t1 = $selected;
+	else
+		$t2 = $selected;
   
   echo '<p>
           <label for="'.$this->get_field_name('title').'">Title: </label><br />
           <input type="text" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" value="'.$title.'"/>
         </p>
         <p>
-          <label for="'.$this->get_field_name('tagcount').'">Number of tags to show: </label><br />
+        <p>
+          <label for="'.$this->get_field_name('taxonomy').'">Show: </label><br />
+          <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'"
+            <option value="post_tag" '.$t1.'>Tags</option>
+            <option value="category" '.$t2.'>Categories</option>
+          </select>
+        </p>
+
+          <label for="'.$this->get_field_name('tagcount').'">Number of items to show: </label><br />
           <input type="text" id="'.$this->get_field_id('tagcount').'" name="'.$this->get_field_name('tagcount').'" value="'.$instance['tagcount'].'"/>
         </p>
         <p>
@@ -160,6 +177,7 @@ function form($instance) {
             <option value="in" '.$s8.'>Inches (in)</option>
           </select>
         </p>
+        <p><small>You can read more about CSS font units at <a href="http://www.w3schools.com/css/css_units.asp">W3Schools</a>.</small></p>
         <p>
           <label for="'.$this->get_field_name('format').'">Format: </label><br />
           <select id="'.$this->get_field_id('format').'" name="'.$this->get_field_name('format').'"
