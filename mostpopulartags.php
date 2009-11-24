@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 2.5
+Version: 2.6
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -177,6 +177,7 @@ function form($instance) {
             <option value="in" '.$s8.'>Inches (in)</option>
           </select>
         </p>
+        <p><small>You can read more about CSS font units at <a href="http://www.w3schools.com/css/css_units.asp">W3Schools</a>.</small></p>
         <p>
           <label for="'.$this->get_field_name('format').'">Format: </label><br />
           <select id="'.$this->get_field_id('format').'" name="'.$this->get_field_name('format').'"

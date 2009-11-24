@@ -19,6 +19,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 2.6: The different unit options were causing some confusion, so a link to the W3Schools CSS unit reference has been added to the widget configuration view
 - 2.5: Added a nifty uninstaller that removes all traces of the plugin when it's deleted via the Manage Plugins menu
 - 2.0.1: Readme.txt spelling corrections
 - 2.0: Added the option to display categories in addition to tags
@@ -27,3 +28,8 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 == Miscellaneous ==
 
 Version 0.6 of this plugin, which adds advanced ordering options, was heavily contributed to by Alexandre Piccolo - http://www.piparote.com
+
+== Donate ==
+
+If you like the Most Popular Tags plugin, please consider [donating](http://www.maxpagels.com/donate/).
+
