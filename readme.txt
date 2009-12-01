@@ -20,6 +20,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 2.6.1 Fixed a bug that appeared in some environments
 - 2.6: The different unit options were causing some confusion, so a link to the W3Schools CSS unit reference has been added to the widget configuration view
 - 2.5: Added a nifty uninstaller that removes all traces of the plugin when it's deleted via the Manage Plugins menu
 - 2.0.1: Readme.txt spelling corrections
