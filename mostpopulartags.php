@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 3.0
+Version: 2.8
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
