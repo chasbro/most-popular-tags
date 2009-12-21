@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 2.6.1
+Version: 3.0
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -44,8 +44,8 @@ function Most_Popular_Tags() {
 function widget($args, $instance) {
   extract($args);
   
-  $title = apply_filters('widget_title', empty($instance['title']) ? '&nbsp;' : $instance['title']);
-  $tagcount = empty($instance['tagcount']) ? 10 : $instance['tagcount'];
+  $title = apply_filters('widget_title', empty($instance['title']) ? ' ' : $instance['title']);
+  $tagcount = empty($instance['tagcount']) ? 0 : $instance['tagcount'];
   $smallest = empty($instance['smallest']) ? 12 : $instance['smallest'];
   $largest = empty($instance['largest']) ? 12 : $instance['largest'];
   $unit = empty($instance['unit']) ? 'px' : $instance['unit'];
@@ -53,14 +53,23 @@ function widget($args, $instance) {
   $orderby = empty($instance['orderby']) ? 'count' : $instance['orderby'];
   $order = empty($instance['order']) ? 'DESC' : $instance['order'];
   $taxonomy = empty($instance['taxonomy']) ? 'post_tag' : $instance['taxonomy'];
-  
+  $separator = empty($instance['separator']) ? ' ' : $instance['separator'];
+   
   echo $before_widget;
   
   if($title) {
     echo $before_title . $title . $after_title;
   }
-  
-  wp_tag_cloud("smallest=$smallest&largest=$largest&number=$tagcount&orderby=$orderby&order=$order&unit=$unit&format=$format&taxonomy=$taxonomy");
+
+  wp_tag_cloud("smallest=$smallest".
+               "&largest=$largest".
+               "&number=$tagcount".
+               "&orderby=$orderby".
+               "&order=$order".
+               "&unit=$unit".
+               "&format=$format".
+               "&taxonomy=$taxonomy".
+               "&separator=$separator");
   
   echo $after_widget;
 }
@@ -70,36 +79,42 @@ function widget($args, $instance) {
 */
 function update($new_instance, $old_instance) {
   $instance = $old_instance;
-  $instance['title'] = strip_tags(stripslashes($new_instance['title']));
-  $instance['tagcount'] = intval(strip_tags(stripslashes($new_instance['tagcount'])));
-  $instance['smallest'] = intval(strip_tags(stripslashes($new_instance['smallest'])));
-  $instance['largest'] = intval(strip_tags(stripslashes($new_instance['largest'])));
-  $instance['unit'] = strip_tags(stripslashes($new_instance['unit']));
-  $instance['format'] = strip_tags(stripslashes($new_instance['format']));
-  $instance['orderby'] = strip_tags(stripslashes($new_instance['orderby']));
-  $instance['order'] = strip_tags(stripslashes($new_instance['order']));
-  $instance['taxonomy'] = strip_tags(stripslashes($new_instance['taxonomy']));
+  $instance['title'] = $new_instance['title'];
+  $instance['tagcount'] = intval($new_instance['tagcount']);
+  $instance['smallest'] = intval($new_instance['smallest']);
+  $instance['largest'] = intval($new_instance['largest']);
+  $instance['unit'] = $new_instance['unit'];
+  $instance['format'] = $new_instance['format'];
+  $instance['orderby'] = $new_instance['orderby'];
+  $instance['order'] = $new_instance['order'];
+  $instance['taxonomy'] = $new_instance['taxonomy'];
+  $instance['separator'] = $new_instance['separator'];
   
   return $instance;
 }
 
+/**
+*
+*/
 function form($instance) {
   $instance = wp_parse_args((array)$instance, array('title' => 'Most Popular Tags',
-                                                    'tagcount' => 10,
+                                                    'tagcount' => 0,
                                                     'smallest' => 12,
                                                     'largest' => 12,
                                                     'unit' => 'px',
                                                     'format' => 'flat',
                                                     'orderby' => 'count',
                                                     'order' => 'DESC',
-                                                    'taxonomy' => 'post_tag'));
+                                                    'taxonomy' => 'post_tag',
+                                                    'separator' => ''));
   
-  $title = htmlspecialchars($instance['title']);
-  $unit = htmlspecialchars($instance['unit']);
-  $format = htmlspecialchars($instance['format']);
-  $orderby = htmlspecialchars($instance['orderby']);
-  $order = htmlspecialchars($instance['order']);
-  $taxonomy = htmlspecialchars($instance['taxonomy']);
+  $title = esc_html($instance['title']);
+  $unit = $instance['unit'];
+  $format = $instance['format'];
+  $orderby = $instance['orderby'];
+  $order = $instance['order'];
+  $taxonomy = $instance['taxonomy'];
+  $separator = esc_html($instance['separator']);
   
   $selected = "selected";
 	
@@ -120,10 +135,14 @@ function form($instance) {
 	else
 		$s8 = $selected;
 		
-	if($instance['format'] == "flat")
+	if($instance['format'] == "flat") {
 		$f1 = $selected;
-	else
+	  $sepcss = "";
+	}
+	else {
 		$f2 = $selected;
+	  $sepcss = "display:none";
+	}
 		
 	if($instance['orderby'] == "count")
 		$ob1 = $selected;
@@ -132,8 +151,10 @@ function form($instance) {
 
 	if($instance['order'] == "ASC")
 		$o1 = $selected;
+	elseif($instance['order'] == "DESC")
+	  $o2 = $selected;
 	else
-		$o2 = $selected;
+		$o3 = $selected;
 
 	if($instance['taxonomy'] == "post_tag")
 		$t1 = $selected;
@@ -147,15 +168,16 @@ function form($instance) {
         <p>
         <p>
           <label for="'.$this->get_field_name('taxonomy').'">Show: </label><br />
-          <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'"
+          <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'">
             <option value="post_tag" '.$t1.'>Tags</option>
             <option value="category" '.$t2.'>Categories</option>
           </select>
         </p>
-
+        <p>
           <label for="'.$this->get_field_name('tagcount').'">Number of items to show: </label><br />
           <input type="text" id="'.$this->get_field_id('tagcount').'" name="'.$this->get_field_name('tagcount').'" value="'.$instance['tagcount'].'"/>
         </p>
+        <p><small>0 shows all available items.</small></p>
         <p>
           <label for="'.$this->get_field_name('smallest').'">Smallest font size: </label><br />
           <input type="text" id="'.$this->get_field_id('smallest').'" name="'.$this->get_field_name('smallest').'" value="'.$instance['smallest'].'"/>
@@ -166,7 +188,7 @@ function form($instance) {
         </p>
         <p>
           <label for="'.$this->get_field_name('unit').'">Unit: </label><br />
-          <select id="'.$this->get_field_id('unit').'" name="'.$this->get_field_name('unit').'"
+          <select id="'.$this->get_field_id('unit').'" name="'.$this->get_field_name('unit').'">
             <option value="px" '.$s1.'>Pixels (px)</option>
             <option value="pt" '.$s2.'>Points (pt)</option>
             <option value="%" '.$s3.'>Percent (%)</option>
@@ -180,23 +202,31 @@ function form($instance) {
         <p><small>You can read more about CSS font units at <a href="http://www.w3schools.com/css/css_units.asp">W3Schools</a>.</small></p>
         <p>
           <label for="'.$this->get_field_name('format').'">Format: </label><br />
-          <select id="'.$this->get_field_id('format').'" name="'.$this->get_field_name('format').'"
+          <select id="'.$this->get_field_id('format').'" name="'.$this->get_field_name('format').'" onChange="if(document.getElementById(\''.$this->get_field_id('format').'\').selectedIndex == 0) {document.getElementById(\''.$this->get_field_id('separator').'mptags\').style.display = \'\';} else {document.getElementById(\''.$this->get_field_id('separator').'mptags\').style.display = \'none\';}">
             <option value="flat" '.$f1.'>Flat</option>
             <option value="list" '.$f2.'>List</option>
           </select>
         </p>
+        <div id="'.$this->get_field_id('separator').'mptags" style="'.$sepcss.'">
+        <p>
+          <label for="'.$this->get_field_name('separator').'">Separator: </label><br />
+          <input type="text" id="'.$this->get_field_id('separator').'" name="'.$this->get_field_name('separator').'" value="'.$separator.'"/>
+        </p>
+        <p><small>Leave this field empty for the default value (space).</small></p>
+        </div>
         <p>
           <label for="'.$this->get_field_name('orderby').'">Order by: </label><br />
-          <select id="'.$this->get_field_id('orderby').'" name="'.$this->get_field_name('orderby').'"
+          <select id="'.$this->get_field_id('orderby').'" name="'.$this->get_field_name('orderby').'">
             <option value="count" '.$ob1.'>Number of posts</option>
             <option value="name" '.$ob2.'>Tag name</option>
           </select>
         </p>
         <p>
           <label for="'.$this->get_field_name('order').'">Order: </label><br />
-          <select id="'.$this->get_field_id('order').'" name="'.$this->get_field_name('order').'"
+          <select id="'.$this->get_field_id('order').'" name="'.$this->get_field_name('order').'">
             <option value="ASC" '.$o1.'>Ascending</option>
             <option value="DESC" '.$o2.'>Descending</option>
+            <option value="RAND" '.$o3.'>Random</option>
           </select>
         </p>';
 }
