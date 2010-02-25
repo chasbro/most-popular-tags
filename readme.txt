@@ -18,6 +18,9 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. The Most Popular Tags widget can now be configured and used from the Appearance -> Widgets menu
 
+== Screenshots ==
+![Most Popular Tags](http://www.maxpagels.com/mptags.png "Most Popular Tags - configuration view")
+
 == Changelog ==
 
 - 2.85: Added the option to display link categories in addition to regular categories and tags
