@@ -19,7 +19,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 3. The Most Popular Tags widget can now be configured and used from the Appearance -> Widgets menu
 
 == Screenshots ==
-![Most Popular Tags](http://www.maxpagels.com/mptags.png "Most Popular Tags - configuration view")
+1. Widget configuration
 
 == Changelog ==
 
