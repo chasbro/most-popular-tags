@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 2.8
+Version: 2.85
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -158,8 +158,10 @@ function form($instance) {
 
 	if($instance['taxonomy'] == "post_tag")
 		$t1 = $selected;
-	else
+	elseif($instance['taxonomy'] == "category")
 		$t2 = $selected;
+	else
+		$t3 = $selected;
   
   echo '<p>
           <label for="'.$this->get_field_name('title').'">Title: </label><br />
@@ -171,6 +173,7 @@ function form($instance) {
           <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'">
             <option value="post_tag" '.$t1.'>Tags</option>
             <option value="category" '.$t2.'>Categories</option>
+						<option value="link_category" '.$t3.'>Link categories</option>
           </select>
         </p>
         <p>

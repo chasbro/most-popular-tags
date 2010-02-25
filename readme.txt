@@ -3,7 +3,7 @@ Contributors: maxpagels
 Donate link: http://www.maxpagels.com/donate
 Tags: widgets, tags, categories, popular
 Requires at least: 2.9
-Tested up to: 2.9
+Tested up to: 2.9.2
 Stable tag: trunk
 
 Most Popular Tags is a plugin that displays your blog's most popular tags or categories as a sidebar widget
@@ -20,6 +20,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 2.85: Added the option to display link categories in addition to regular categories and tags
 - 2.8: Added the option to choose a separator (when format is "flat") and a new "random" order option. Additionally, the plugin now displays all tags/categories by default, not 10. The 2.8 version requires WordPress 2.9 or higher.
 - 2.6.1: Fixed a bug that appeared in some environments
 - 2.6: The different unit options were causing some confusion, so a link to the W3Schools CSS unit reference has been added to the widget configuration view
