@@ -3,7 +3,7 @@ Contributors: maxpagels
 Donate link: http://www.maxpagels.com/donate
 Tags: widgets, tags, categories, popular
 Requires at least: 2.9
-Tested up to: 2.9.2
+Tested up to: 3.0
 Stable tag: trunk
 
 Most Popular Tags is a plugin that displays your blog's most popular tags or categories as a sidebar widget
