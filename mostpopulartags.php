@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 2.85
+Version: 2.86
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -117,23 +117,29 @@ function form($instance) {
   $separator = esc_html($instance['separator']);
   
   $selected = "selected";
-	
-	if($instance['unit'] == "px")
-		$s1 = $selected;
-	elseif($instance['unit'] == "pt")
-		$s2 = $selected;
-	elseif($instance['unit'] == "%")
-		$s3 = $selected;
-	elseif($instance['unit'] == "em")
-		$s4 = $selected;
-	elseif($instance['unit'] == "pc")
-		$s5 = $selected;
-	elseif($instance['unit'] == "mm")
-		$s6 = $selected;
-	elseif($instance['unit'] == "cm")
-		$s7 = $selected;
-	else
-		$s8 = $selected;
+    switch($instance['unit']) {
+        case "px":
+            $s1 = $selected;
+            break;
+        case "pt":
+            $s2 = $selected;
+            break;      
+        case "%":
+            $s3 = $selected;
+            break;  
+        case "em":
+            $s4 = $selected;
+            break;  
+        case "pc":
+            $s5 = $selected;
+            break;
+        case "mm":
+            $s6 = $selected;
+            break;
+        case "cm":
+            $s7 = $selected;
+            break;           
+    }
 		
 	if($instance['format'] == "flat") {
 		$f1 = $selected;
