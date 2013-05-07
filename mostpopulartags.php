@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 2.86
+Version: 3.0.0
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -81,8 +81,8 @@ function update($new_instance, $old_instance) {
   $instance = $old_instance;
   $instance['title'] = $new_instance['title'];
   $instance['tagcount'] = intval($new_instance['tagcount']);
-  $instance['smallest'] = intval($new_instance['smallest']);
-  $instance['largest'] = intval($new_instance['largest']);
+  $instance['smallest'] = floatval($new_instance['smallest']);
+  $instance['largest'] = floatval($new_instance['largest']);
   $instance['unit'] = $new_instance['unit'];
   $instance['format'] = $new_instance['format'];
   $instance['orderby'] = $new_instance['orderby'];
@@ -129,16 +129,22 @@ function form($instance) {
             break;  
         case "em":
             $s4 = $selected;
+            break;
+        case "rem":
+            $s5 = $selected;
             break;  
         case "pc":
-            $s5 = $selected;
-            break;
-        case "mm":
             $s6 = $selected;
             break;
-        case "cm":
+        case "mm":
             $s7 = $selected;
-            break;           
+            break;
+        case "cm":
+            $s8 = $selected;
+            break;
+        case "in":
+            $s9 = $selected;
+            break;             
     }
 		
 	if($instance['format'] == "flat") {
@@ -202,10 +208,11 @@ function form($instance) {
             <option value="pt" '.$s2.'>Points (pt)</option>
             <option value="%" '.$s3.'>Percent (%)</option>
             <option value="em" '.$s4.'>Ems (em)</option>
-            <option value="pc" '.$s5.'>Picas (pc)</option>
-            <option value="mm" '.$s6.'>Millimeters (mm)</option>
-            <option value="cm" '.$s7.'>Centimeters (cm)</option>
-            <option value="in" '.$s8.'>Inches (in)</option>
+            <option value="rem" '.$s5.'>Root em (rem)</option>
+            <option value="pc" '.$s6.'>Picas (pc)</option>
+            <option value="mm" '.$s7.'>Millimeters (mm)</option>
+            <option value="cm" '.$s8.'>Centimeters (cm)</option>
+            <option value="in" '.$s9.'>Inches (in)</option>
           </select>
         </p>
         <p><small>You can read more about CSS font units at <a href="http://www.w3schools.com/css/css_units.asp">W3Schools</a>.</small></p>
