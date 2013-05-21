@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 3.0.0
+Version: 3.1.0
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -146,34 +146,34 @@ function form($instance) {
             $s9 = $selected;
             break;             
     }
-		
-	if($instance['format'] == "flat") {
-		$f1 = $selected;
-	  $sepcss = "";
-	}
-	else {
-		$f2 = $selected;
-	  $sepcss = "display:none";
-	}
-		
-	if($instance['orderby'] == "count")
-		$ob1 = $selected;
-	else
-		$ob2 = $selected;
+    
+  if($instance['format'] == "flat") {
+    $f1 = $selected;
+    $sepcss = "";
+  }
+  else {
+    $f2 = $selected;
+    $sepcss = "display:none";
+  }
+    
+  if($instance['orderby'] == "count")
+    $ob1 = $selected;
+  else
+    $ob2 = $selected;
 
-	if($instance['order'] == "ASC")
-		$o1 = $selected;
-	elseif($instance['order'] == "DESC")
-	  $o2 = $selected;
-	else
-		$o3 = $selected;
+  if($instance['order'] == "ASC")
+    $o1 = $selected;
+  elseif($instance['order'] == "DESC")
+    $o2 = $selected;
+  else
+    $o3 = $selected;
 
-	if($instance['taxonomy'] == "post_tag")
-		$t1 = $selected;
-	elseif($instance['taxonomy'] == "category")
-		$t2 = $selected;
-	else
-		$t3 = $selected;
+  if($instance['taxonomy'] == "post_tag")
+    $t1 = $selected;
+  elseif($instance['taxonomy'] == "category")
+    $t2 = $selected;
+  else
+    $t3 = $selected;
   
   echo '<p>
           <label for="'.$this->get_field_name('title').'">Title: </label><br />
@@ -185,7 +185,7 @@ function form($instance) {
           <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'">
             <option value="post_tag" '.$t1.'>Tags</option>
             <option value="category" '.$t2.'>Categories</option>
-						<option value="link_category" '.$t3.'>Link categories</option>
+            <option value="link_category" '.$t3.'>Link categories</option>
           </select>
         </p>
         <p>
@@ -257,5 +257,29 @@ function Most_Popular_Tags_Init() {
 }
 
 add_action('widgets_init', 'Most_Popular_Tags_Init');
+
+/**
+* Add a shortcode for embedding a tag cloud in a post or page
+*/
+
+function tagcloud($atts) {
+  $s = shortcode_atts( array('smallest'                  => 8, 
+                             'largest'                   => 22,
+                             'unit'                      => 'pt', 
+                             'number'                    => 45,  
+                             'format'                    => 'flat',
+                             'separator'                 => "",
+                             'orderby'                   => 'name', 
+                             'order'                     => 'ASC',
+                             'exclude'                   => null, 
+                             'include'                   => null, 
+                             'link'                      => 'view',
+                             'echo'                      => false,
+                             'taxonomy'                  => 'post_tag'), $atts );
+  return wp_tag_cloud($s);
+}
+
+
+add_shortcode('tagcloud', 'tagcloud');
 
 ?>
