@@ -3,7 +3,7 @@ Contributors: maxpagels
 Donate link: http://www.maxpagels.com/donate
 Tags: widgets, tags, categories, popular
 Requires at least: 2.9
-Tested up to: 3.5.1
+Tested up to: 3.7.1
 Stable tag: trunk
 
 Most Popular Tags is a plugin that displays your blog's most popular tags or categories as a sidebar widget
@@ -24,6 +24,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 3.2.0: Added the option to use CSS x-height (ex) units
 - 3.1.0: Added the [tagcloud] shortcode, making it easy to embed tag clouds in posts and pages, not just as a widget.
 - 3.0.0: Fixed bug where decimal unit sizes could not be added, added support for the Root em unit
 - 2.86: Improved code formatting and minor code performance upgrades
