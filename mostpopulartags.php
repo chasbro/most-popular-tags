@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 3.2.0
+Version: 3.2.1
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -248,6 +248,9 @@ function form($instance) {
             <option value="DESC" '.$o2.'>Descending</option>
             <option value="RAND" '.$o3.'>Random</option>
           </select>
+        </p>
+        <p>
+          Like this plugin? Hate it? Suggestions? <a href="http://maxpagels.polldaddy.com/s/most-popular-tags-survey" target="_blank">Let us know!</a>
         </p>';
 }
 
@@ -282,7 +285,6 @@ function tagcloud($atts) {
                              'taxonomy'                  => 'post_tag'), $atts );
   return wp_tag_cloud($s);
 }
-
 
 add_shortcode('tagcloud', 'tagcloud');
 
