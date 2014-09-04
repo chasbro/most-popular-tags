@@ -4,12 +4,12 @@
 
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
-Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 3.2.2
+Description: A configurable widget  that displays your blog's most popular tags or categories
+Version: 3.2.3
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
-Copyright 2009  Max Pagels  (email : max.pagels1@gmail.com)
+Copyright 2014  Max Pagels  (email : max.pagels1@gmail.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ function Most_Popular_Tags() {
 */
 function widget($args, $instance) {
   extract($args);
-  
+
   $title = apply_filters('widget_title', empty($instance['title']) ? ' ' : $instance['title']);
   $tagcount = empty($instance['tagcount']) ? 0 : $instance['tagcount'];
   $smallest = empty($instance['smallest']) ? 12 : $instance['smallest'];
@@ -89,7 +89,6 @@ function update($new_instance, $old_instance) {
   $instance['order'] = $new_instance['order'];
   $instance['taxonomy'] = $new_instance['taxonomy'];
   $instance['separator'] = $new_instance['separator'];
-  
   return $instance;
 }
 

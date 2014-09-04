@@ -24,6 +24,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 3.2.3: No structural changes, just some code cleanup
 - 3.2.0: Added the option to use CSS x-height (ex) units
 - 3.1.0: Added the [tagcloud] shortcode, making it easy to embed tag clouds in posts and pages, not just as a widget.
 - 3.0.0: Fixed bug where decimal unit sizes could not be added, added support for the Root em unit
