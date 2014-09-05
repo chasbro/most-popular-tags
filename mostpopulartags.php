@@ -4,12 +4,12 @@
 
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
-Description: A configurable widget  that displays your blog's most popular tags or categories
-Version: 3.2.3
+Description: A configurable widget that displays your blog's most popular tags or categories
+Version: 4.0
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
-Copyright 2014  Max Pagels  (email : max.pagels1@gmail.com)
+Copyright 2014  Max Pagels  (email : max.pagels@maxpagels.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ function Most_Popular_Tags() {
 }
 
 /**
-*
+* Logic for actually displaying the widget
 */
 function widget($args, $instance) {
   extract($args);
@@ -54,9 +54,11 @@ function widget($args, $instance) {
   $order = empty($instance['order']) ? 'DESC' : $instance['order'];
   $taxonomy = empty($instance['taxonomy']) ? 'post_tag' : $instance['taxonomy'];
   $separator = empty($instance['separator']) ? ' ' : $instance['separator'];
+  $include = empty($instance['include']) ? ' ' : $instance['include'];
+  $exclude = empty($instance['exclude']) ? ' ' : $instance['exclude'];
    
   echo $before_widget;
-  
+
   if($title) {
     echo $before_title . $title . $after_title;
   }
@@ -69,13 +71,15 @@ function widget($args, $instance) {
                "&unit=$unit".
                "&format=$format".
                "&taxonomy=$taxonomy".
+               "&include=$include".
+               "&exclude=$exclude".
                "&separator=$separator");
   
   echo $after_widget;
 }
 
 /**
-*
+* Called when the instance of a widget is saved
 */
 function update($new_instance, $old_instance) {
   $instance = $old_instance;
@@ -89,6 +93,8 @@ function update($new_instance, $old_instance) {
   $instance['order'] = $new_instance['order'];
   $instance['taxonomy'] = $new_instance['taxonomy'];
   $instance['separator'] = $new_instance['separator'];
+  $instance['include'] = $new_instance['include'];
+  $instance['exclude'] = $new_instance['exclude'];
   return $instance;
 }
 
@@ -105,7 +111,9 @@ function form($instance) {
                                                     'orderby' => 'count',
                                                     'order' => 'DESC',
                                                     'taxonomy' => 'post_tag',
-                                                    'separator' => ''));
+                                                    'separator' => '',
+                                                    'include' => '',
+                                                    'exclude' => ''));
   
   $title = esc_html($instance['title']);
   $unit = $instance['unit'];
@@ -114,9 +122,11 @@ function form($instance) {
   $order = $instance['order'];
   $taxonomy = $instance['taxonomy'];
   $separator = esc_html($instance['separator']);
-  
+  $include = esc_html($instance['include']);
+  $exclude = esc_html($instance['exclude']);
+
   $selected = "selected";
-    switch($instance['unit']) {
+    switch($unit) {
         case "px":
             $s1 = $selected;
             break;
@@ -149,7 +159,7 @@ function form($instance) {
             break;           
     }
     
-  if($instance['format'] == "flat") {
+  if($format == "flat") {
     $f1 = $selected;
     $sepcss = "";
   }
@@ -158,21 +168,21 @@ function form($instance) {
     $sepcss = "display:none";
   }
     
-  if($instance['orderby'] == "count")
+  if($orderby == "count")
     $ob1 = $selected;
   else
     $ob2 = $selected;
 
-  if($instance['order'] == "ASC")
+  if($order == "ASC")
     $o1 = $selected;
-  elseif($instance['order'] == "DESC")
+  elseif($order == "DESC")
     $o2 = $selected;
   else
     $o3 = $selected;
 
-  if($instance['taxonomy'] == "post_tag")
+  if($taxonomy == "post_tag")
     $t1 = $selected;
-  elseif($instance['taxonomy'] == "category")
+  elseif($taxonomy == "category")
     $t2 = $selected;
   else
     $t3 = $selected;
@@ -195,6 +205,14 @@ function form($instance) {
           <input type="text" id="'.$this->get_field_id('tagcount').'" name="'.$this->get_field_name('tagcount').'" value="'.$instance['tagcount'].'"/>
         </p>
         <p><small>0 shows all available items.</small></p>
+        <p>
+          <label for="'.$this->get_field_name('include').'">Include tags (comma separated list of IDs): </label><br />
+          <input type="text" id="'.$this->get_field_id('include').'" name="'.$this->get_field_name('include').'" value="'.$include.'"/>
+        </p>
+        <p>
+          <label for="'.$this->get_field_name('exclude').'">Exclude tags: (comma separated list of IDs) </label><br />
+          <input type="text" id="'.$this->get_field_id('exclude').'" name="'.$this->get_field_name('exclude').'" value="'.$exclude.'"/>
+        </p>
         <p>
           <label for="'.$this->get_field_name('smallest').'">Smallest font size: </label><br />
           <input type="text" id="'.$this->get_field_id('smallest').'" name="'.$this->get_field_name('smallest').'" value="'.$instance['smallest'].'"/>
@@ -256,7 +274,7 @@ function form($instance) {
 }
 
 /**
-*
+* Initialisation / registration of the widget
 */
 function Most_Popular_Tags_Init() {
   register_widget('Most_Popular_Tags');
