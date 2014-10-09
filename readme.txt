@@ -1,6 +1,6 @@
 === Most Popular Tags ===
 Contributors: maxpagels
-Tags: widgets, tags, categories, popular
+Tags: widgets, tags, categories, popular, tagcloud
 Requires at least: 2.9
 Tested up to: 4.0
 Stable tag: trunk
