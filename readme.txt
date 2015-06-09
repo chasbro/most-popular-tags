@@ -23,6 +23,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 5.0: Added support for custom taxonomies. Thanks to everyone who requested it (and sorry for the delay!)
 - 4.1: Added the option to use CSS viewport width/height (vw/vh) units
 - 4.0: Added the option to include or exclude certain tags from the tag cloud / list. Sorry for the delay, I know this has been requested for ages!
 - 3.2.3: No structural changes, just some code cleanup

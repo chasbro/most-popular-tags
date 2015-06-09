@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 4.1
+Version: 5.0
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -162,9 +162,9 @@ function form($instance) {
             break;
         case "vh":
             $s12 = $selected;
-            break;           
+            break;
     }
-    
+
   if($format == "flat") {
     $f1 = $selected;
     $sepcss = "";
@@ -173,7 +173,7 @@ function form($instance) {
     $f2 = $selected;
     $sepcss = "display:none";
   }
-    
+
   if($orderby == "count")
     $ob1 = $selected;
   else
@@ -186,13 +186,18 @@ function form($instance) {
   else
     $o3 = $selected;
 
+  $taxcss = "display:none";
   if($taxonomy == "post_tag")
     $t1 = $selected;
   elseif($taxonomy == "category")
     $t2 = $selected;
-  else
+  elseif($taxonomy == "link_category")
     $t3 = $selected;
-  
+  else {
+    $t4 = $selected;
+    $taxcss = "";
+  }
+
   echo '<p>
           <label for="'.$this->get_field_name('title').'">Title: </label><br />
           <input type="text" id="'.$this->get_field_id('title').'" name="'.$this->get_field_name('title').'" value="'.$title.'"/>
@@ -200,12 +205,20 @@ function form($instance) {
         <p>
         <p>
           <label for="'.$this->get_field_name('taxonomy').'">Show: </label><br />
-          <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'">
+          <select id="'.$this->get_field_id('taxonomy').'" name="'.$this->get_field_name('taxonomy').'" onChange="if(document.getElementById(\''.$this->get_field_id('taxonomy').'\').selectedIndex == 3) {document.getElementById(\''.$this->get_field_id('custom_taxonomy').'mptags\').style.display = \'\';} else {document.getElementById(\''.$this->get_field_id('custom_taxonomy').'mptags\').style.display = \'none\';}">>
             <option value="post_tag" '.$t1.'>Tags</option>
             <option value="category" '.$t2.'>Categories</option>
             <option value="link_category" '.$t3.'>Link categories</option>
+            <option value="" '.$t4.'>Custom taxonomy</option>
           </select>
         </p>
+        <div id="'.$this->get_field_id('custom_taxonomy').'mptags" style="'.$taxcss.'">
+        <p>
+          <label for="'.$this->get_field_name('custom_taxonomy').'">Name of custom taxonomy: </label><br />
+          <input type="text" id="'.$this->get_field_id('custom_taxonomy').'" name="'.$this->get_field_name('custom_taxonomy').'" value="'.$taxonomy.'" onChange="document.getElementById(\''.$this->get_field_id('taxonomy').'\').options[3].value = document.getElementById(\''.$this->get_field_id('custom_taxonomy').'\').value " />
+        </p>
+        <p><small>Enter the <a href="https://codex.wordpress.org/Function_Reference/register_taxonomy">name of your custom taxonomy</a>.</small></p>
+        </div>
         <p>
           <label for="'.$this->get_field_name('tagcount').'">Number of items to show: </label><br />
           <input type="text" id="'.$this->get_field_id('tagcount').'" name="'.$this->get_field_name('tagcount').'" value="'.$instance['tagcount'].'"/>
