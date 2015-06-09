@@ -5,7 +5,7 @@ Requires at least: 2.9
 Tested up to: 4.2.2
 Stable tag: trunk
 
-Most Popular Tags is a plugin that displays your blog's most popular tags or categories as a sidebar widget
+Most Popular Tags is a plugin that displays your blog's most popular tags, categories or custom taxonomies as a sidebar widget.
 
 == Description ==
 
