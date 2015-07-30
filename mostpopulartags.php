@@ -5,7 +5,7 @@
 Plugin name: Most Popular Tags
 Plugin URI: http://www.maxpagels.com/projects/mptags
 Description: A configurable widget that displays your blog's most popular tags or categories
-Version: 5.0
+Version: 5.1
 Author: Max Pagels
 Author URI: http://www.maxpagels.com
 
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 class Most_Popular_Tags extends WP_Widget {
-  
+
 /**
 *
 */
@@ -56,7 +56,7 @@ function widget($args, $instance) {
   $separator = empty($instance['separator']) ? ' ' : $instance['separator'];
   $include = empty($instance['include']) ? ' ' : $instance['include'];
   $exclude = empty($instance['exclude']) ? ' ' : $instance['exclude'];
-   
+
   echo $before_widget;
 
   if($title) {
@@ -74,7 +74,7 @@ function widget($args, $instance) {
                "&include=$include".
                "&exclude=$exclude".
                "&separator=$separator");
-  
+
   echo $after_widget;
 }
 
@@ -114,7 +114,7 @@ function form($instance) {
                                                     'separator' => '',
                                                     'include' => '',
                                                     'exclude' => ''));
-  
+
   $title = esc_html($instance['title']);
   $unit = $instance['unit'];
   $format = $instance['format'];
@@ -124,6 +124,9 @@ function form($instance) {
   $separator = esc_html($instance['separator']);
   $include = esc_html($instance['include']);
   $exclude = esc_html($instance['exclude']);
+  $t1 = $t2 = $t3 = $t4 = '';
+  $s1 = $s2 = $s3 = $s4 = $s5 = $s6 = $s7 = $s8 = $s9 = $s10 = $s11 = $s12 = '';
+  $f1 = $f2 = $ob1 = $ob2 = $o1 = $o2 = $o3 = '';
 
   $selected = "selected";
     switch($unit) {
@@ -132,16 +135,16 @@ function form($instance) {
             break;
         case "pt":
             $s2 = $selected;
-            break;      
+            break;
         case "%":
             $s3 = $selected;
-            break;  
+            break;
         case "em":
             $s4 = $selected;
             break;
         case "rem":
             $s5 = $selected;
-            break;  
+            break;
         case "pc":
             $s6 = $selected;
             break;
@@ -308,16 +311,16 @@ add_action('widgets_init', 'Most_Popular_Tags_Init');
 */
 
 function tagcloud($atts) {
-  $s = shortcode_atts( array('smallest'                  => 8, 
+  $s = shortcode_atts( array('smallest'                  => 8,
                              'largest'                   => 22,
-                             'unit'                      => 'pt', 
-                             'number'                    => 45,  
+                             'unit'                      => 'pt',
+                             'number'                    => 45,
                              'format'                    => 'flat',
                              'separator'                 => "",
-                             'orderby'                   => 'name', 
+                             'orderby'                   => 'name',
                              'order'                     => 'ASC',
-                             'exclude'                   => null, 
-                             'include'                   => null, 
+                             'exclude'                   => null,
+                             'include'                   => null,
                              'link'                      => 'view',
                              'echo'                      => false,
                              'taxonomy'                  => 'post_tag'), $atts );

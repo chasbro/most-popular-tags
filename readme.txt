@@ -2,10 +2,10 @@
 Contributors: maxpagels
 Tags: widgets, tags, categories, popular, tagcloud
 Requires at least: 2.9
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Stable tag: trunk
 
-Most Popular Tags is a plugin that displays your blog's most popular tags, categories and custom taxonomies as a sidebar widget.
+Most Popular Tags is a plugin that displays your WordPress site's most popular tags, categories and custom taxonomies as a sidebar widget.
 
 == Description ==
 
@@ -23,6 +23,7 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 
 == Changelog ==
 
+- 5.1: Hooray, no more PHP notices!
 - 5.0: Added support for custom taxonomies. Thanks to everyone who requested it (and sorry for the delay!)
 - 4.1: Added the option to use CSS viewport width/height (vw/vh) units
 - 4.0: Added the option to include or exclude certain tags from the tag cloud / list. Sorry for the delay, I know this has been requested for ages!
@@ -39,7 +40,3 @@ Most Popular Tags is a WordPress plugin that allows you to display your blog's m
 - 2.0.1: Readme.txt spelling corrections
 - 2.0: Added the option to display categories in addition to tags
 - 1.1: Added millimeters, centimeters, inches and picas to the font unit menu. Additionally, all of the settings have been updated with more descriptive text.
-
-== Miscellaneous ==
-
-Version 0.6 of this plugin, which adds advanced ordering options, was heavily contributed to by Alexandre Piccolo - http://www.piparote.com
